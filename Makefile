@@ -1,5 +1,5 @@
-# glSpect, etc, Makefile, taken from glscope Makefile
-# Barnett 12/20/10. Tidied 1/25/15
+# linux makefile for glspect.
+# Barnett 12/20/10. Tidied 1/25/15. Tweaked for github 3/15/17.
 
 LD_FLAGS =  
 LD_LIBS = -lasound -lfftw3f -lm -pthread  # note single-prec FFTW library
@@ -15,4 +15,4 @@ clean:
 	rm -f core *.o glspect
 
 tar:
-	(cd ..; tar cvfz glSpect.tar.gz glSpect/README glSpect/Makefile glSpect/glspect.cpp glSpect/glspect)
+	(cd ..; tar cvfz glspect.tgz glspect/README.md glspect/Makefile glspect/glspect.cpp glspect/glspect glspect/screenshot.png)
