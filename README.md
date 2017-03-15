@@ -17,6 +17,8 @@ The color range and contrast, as well as the time scroll rate, are adjustable
 in real time. The frequency range is command-line adjustable in powers of 2.
 Smaller windows at the bottom display real-time graphs of the spectrum and the
 signal.
+I originally created this code to help teaching <a href="http://math.dartmouth.edu/~m5f10">Math 5: The Mathematics of Music and Sound</a>
+
 
 ### Installation
 
@@ -24,7 +26,7 @@ This assumes an ubuntu linux system (the below is most recently tested on 16.04 
 
 `sudo apt-get install freeglut3 freeglut3-dev libfftw3-dev libasound2 libasound2-dev`
 
-Now compile via `make`
+Now compile via `make` (although the binary is also shipped, so you may not need to compile)
 
 Run with `./glspect`
 
@@ -32,6 +34,8 @@ You should see a colorful window pop up which scrolls to the left and shows `60 
 You will also want to enable vSync (vertical refresh) in your graphics card settings (for my machine, this menu is reached via `nvidia-settings`).  If your
 refresh rate is not 60 Hz, you should change this manually in the code
 and recompile (sorry; this could be made into an option in future).
+
+I have also bundled a tweaked version of `glscope` by Luke Campagnola in 2005; see the directory `glscope`. It has the same dependencies apart from FFTW.
 
 
 ### Usage:
@@ -93,7 +97,7 @@ The code is somewhat based upon that of `glScope` by Luke Campagnola (2005).
 
 It is also influenced by `baudline` (an amazing tool, which unfortunately has the time and frequency axes flipped).
 
-Here's some useful info taken from Luke's `glScope README` file:
+Here's some useful info taken from Luke's `glScope README` file (see the `glscope` directory in this repo):
 
 ```
 Since there is no interface to change the audio input device that is
@@ -106,3 +110,6 @@ pcm_name = strdup("plughw:0,0");
 I guess you'll have to read about ALSA to figure out how to change 
 that string.
 ```
+
+Note that in Aug 2016, Anthony Agnone created a branch of this code:
+https://github.com/aagnone3/audio_visualization

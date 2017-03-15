@@ -1,0 +1,65 @@
+glScope: ALSA/OpenGL Oscilloscope
+Luke Campagnola <lcampagn@mines.edu>
+2005.08.12
+
+
+This is very a simple audio oscilloscope using OpenGL, GLUT, and ALSA.
+Distributed under a completely free license; this means you can do
+absolutely anything you want with this code. I'd appreciate if you
+credit me where appropriate, though.
+
+
+Controls are as follows: 
+
+  Left mouse button:   Pan
+  Mid mouse button:    Move trigger
+  Right mouse button:  Scale
+  Space bar:           Start/stop recording
+  t:                   Toggle trigger mode (rising, falling, off)
+  p:                   Print data
+  Esc:                 Exit
+
+When you print the plot data by pressing "P", two columns of text are printed 
+to stdout. The first column is time, the second is amplitude. The easiest
+way to capture this data to a file is via the command line: 
+
+./glscope > data.csv
+
+
+Since there is no interface to change the audio input device that is
+displayed, you'll actually have to change some code if you want any
+other channel besides the default recording device. The important line
+in the code looks like this: 
+
+pcm_name = strdup("plughw:0,0");
+
+I guess you'll have to read about ALSA to figure out how to change 
+that string.
+
+Feel free to email me with any questions.
+
+
+
+-------------  Tweaks by Alex Barnett  3/14/2007 -------------------------
+-------------  ahb@math.dartmouth.edu
+
+Additional controls...
+
+q:     quit
+1,2:   make line thinner, fatter
+Tab:   move view so trigger is at right-hand side of screen
+l:     toggle anti-aliased lines
+
+Made arrow keys reversed direction from original
+Right mouse button: made 4x less sensitive
+Made line not blended, to make stand out more.
+Set default trigger at t=0.
+
+
+
+----- To Do:
+
+* make the thing stop redisplaying when paused (still uses 100% CPU currently).
+
+* make variable storage time
+
