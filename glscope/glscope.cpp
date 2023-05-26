@@ -230,8 +230,8 @@ class audioInput {
       stream = SND_PCM_STREAM_CAPTURE;
       /* Init pcm_name. Of course, later you */
       /* will make this configurable ;-)     */
-      pcm_name = strdup("plughw:0,0");
-      //pcm_name = strdup("hw:0,0");
+      //pcm_name = strdup("plughw:0,0");
+      pcm_name = strdup("plughw:1,0");
       /* Allocate the snd_pcm_hw_params_t structure on the stack. */
       snd_pcm_hw_params_alloca(&hwparams);
       /* Open PCM. The last parameter of this function is the mode. */

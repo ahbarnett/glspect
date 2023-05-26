@@ -5,6 +5,7 @@
 // 1/25/14 fix -EPIPE snd_pcm_readi() error. nchannels=2, winf=0 case, etc
 //        added color_byte to clean up color mapping; color map.
 // 1/17/16: freq indicator line via left-button
+// 12/30/21: ross laptop changed for card=1,device=0.
 
 /* Notes: be sure to set vSync wait in graphics card (eg NVIDIA) OpenGL settings
  */
@@ -107,7 +108,7 @@ class audioInput {
   /* the hardware and can be used to specify the  */      
   /* configuration to be used for the PCM stream. */ 
   snd_pcm_hw_params_t *hwparams;
-  /* Name of the PCM device, like plughw:0,0          */
+  /* Name of the PCM device, like plughw:0,0 */
   /* The first number is the number of the soundcard, */
   /* the second number is the number of the device.   */
   char *pcm_name;
@@ -189,7 +190,9 @@ class audioInput {
     stream = SND_PCM_STREAM_CAPTURE;
     /* Init pcm_name. Of course, later you */
     /* will make this configurable ;-)     */
-    pcm_name = strdup("plughw:0,0");
+    /* The format is devicename:cardnumber,devicenumber */
+    /* It can change if you plug in USB devices, etc; you have to recompile */
+    pcm_name = strdup("hw:1,0");   // was plughw:0,0   Use "aplay -l" for avail
     /* Allocate the snd_pcm_hw_params_t structure on the stack. */
     snd_pcm_hw_params_alloca(&hwparams);
     /* Open PCM. The last parameter of this function is the mode. */
@@ -329,8 +332,10 @@ class audioInput {
       }
     }
     fprintf(stderr, "audioCapture thread exiting.\n");
+    return NULL;   // ahb messing
   }                          // ----------------------- end capture thread ----
-};
+
+};   // end class audioInput
 
 
 //////////////////////////////////////// SCENE CLASS /////////////////////////
@@ -558,6 +563,7 @@ class scene
       if (b<0) b=0.0; else if (b>=1) b=.995;
       return (char)(b*4 + 4*((int)(g*8)) + 32*((int)(r*8)));  // pack to 8bits
     }
+    return (char)0;
   }
 
   void regen_sgb()   // recompute 8bit spectrogram from float spectrogram
@@ -811,7 +817,7 @@ int main(int argc, char** argv)
   verb = 0;          // 0 silent, 1 debug, etc
   scn.scroll_fac = 2;    // how many vSyncs to wait before scrolling sg
   param.windowtype = 2;  // Gaussian
-  param.twowinsize = 13; // 8192 samples (around 0.19 sec). Remains fixed
+  param.twowinsize = 13; // 8192 samples (around 0.19 sec)
 
   for (int i=1; i<argc; ++i) {  // .....Parse cmd line options....
     if (!strcmp(argv[i], "-f"))  // option -f makes full screen

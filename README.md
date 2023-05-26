@@ -2,11 +2,10 @@
 
 Real-time audio spectrogram in OpenGL
 
-Alex Barnett, Mathematics Dept, Dartmouth College, and Flatiron Institute,
-Simons Foundation.
-					ahb@math.dartmouth.edu
+Alex Barnett, Flatiron Institute, Simons Foundation.
 
 Original release: December 2010, updated Jan 2015, moved to github 3/15/17.
+Work performed while employed as a professor at the Math Dept, Dartmouth College.
 
 ![screen shot of glspect](screenshot.png)
 
@@ -109,7 +108,8 @@ pcm_name = strdup("plughw:0,0");
 
 I guess you'll have to read about ALSA to figure out how to change 
 that string.
+I have found that one of "hw:0,0" or "hw:1,0" usually works.
 ```
 
-Note that in Aug 2016, Anthony Agnone created a branch of this code:
+Note that in Aug 2016, Anthony Agnone forked a version of this code:
 https://github.com/aagnone3/audio_visualization
