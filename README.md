@@ -2,10 +2,10 @@
 
 Real-time audio spectrogram in OpenGL
 
-Alex Barnett, Flatiron Institute, Simons Foundation.
+Alex Barnett, Center for Computational Mathematics, Flatiron Institute, Simons Foundation.
 
 Original release: December 2010, updated Jan 2015, moved to github 3/15/17.
-Work performed while employed as a professor at the Math Dept, Dartmouth College.
+Work performed while employed as a professor at the Math Dept, Dartmouth College. See below for acknowledgments, and see LICENSE file.
 
 ![screen shot of glspect](screenshot.png)
 
@@ -21,7 +21,7 @@ I originally created this code to help teaching <a href="http://math.dartmouth.e
 
 ### Installation
 
-This assumes an ubuntu linux system (the below is most recently tested on 16.04 LTS). Insure you have the dependencies installed (FFTW3, GLUT, ALSA):
+This assumes an ubuntu-type linux system (the below is most recently tested on 16.04 LTS). Insure you have the dependencies installed (FFTW3, GLUT, ALSA):
 
 `sudo apt-get install freeglut3 freeglut3-dev libfftw3-dev libasound2 libasound2-dev`
 
@@ -59,7 +59,7 @@ Keys & mouse:   arrows or middle button drag - brightness/contrast
 
 ### Bug reports
 
-Please submit an Issue to github, or contact me at the above email address.
+Please submit an Issue to GitHub.
 
 ### To do
 
@@ -75,14 +75,14 @@ Please submit an Issue to github, or contact me at the above email address.
 Please submit a pull request if you fix one of these!
 
 
-### License
-
-It is distributed under a completely free license; this means you can do
-absolutely anything you want with this code. I'd appreciate if you
-credit me where appropriate, though.
-
-
 ### Acknowledgments and notes
+
+This code is based on `glScope`, a real-time oscilloscope
+written by
+[Luke Campagnola](https://github.com/campagnola) in 2005.
+Specifically, it uses a bunch of its code for the GLUT interrupt driven
+display loop, and ALSA audio input buffering. The windowed FFT aspect, and most
+of the display and interactivity is my own.
 
 I discovered in Jan 2015 that `glDrawPixels` is deprecated in OpenGL >3.0,
 which is bad news - if someone figures out how to replace it, let me know,
@@ -92,9 +92,7 @@ CPU usage:
 With `default scroll_factor=2`, CPU usage is less than 50% of one core of a modern intel i7 CPU.
 With scroll_factor=1 (fastest scrolling), this may go up to 75%. If your CPU or GPU is not as fast as this, you might want to shrink n_f and/or n_tw in the code.
 
-The code is somewhat based upon that of `glScope` by Luke Campagnola (2005).
-
-It is also influenced by `baudline` (an amazing tool, which unfortunately has the time and frequency axes flipped).
+My visualization choices are also influenced by `baudline` (an amazing tool, which unfortunately has the time and frequency axes flipped).
 
 Here's some useful info taken from Luke's `glScope README` file (see the `glscope` directory in this repo):
 
@@ -111,5 +109,5 @@ that string.
 I have found that one of "hw:0,0" or "hw:1,0" usually works.
 ```
 
-Note that in Aug 2016, Anthony Agnone forked a version of this code:
-https://github.com/aagnone3/audio_visualization
+Note that in 2016--2018 Anthony Agnone rewrote a version of glspect in C++,
+including CMake build: https://github.com/aagnone3/audio_visualization
